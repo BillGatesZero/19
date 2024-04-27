@@ -6,6 +6,7 @@ public class Wallet : Tools
 {   
     public const string ANIM_PARM_IS_PAYING = "Atk";
     private Animator anim;
+    public int money = 50;
     private void Start(){
         anim = GetComponent<Animator>();
     }
@@ -16,8 +17,8 @@ public class Wallet : Tools
         
     }
     private void OnTriggerEnter(Collider other){
-        if(other.tag == "Seller"){
-        print("Pay");
+        if(other.tag == Tag.SEL){
+            other.GetComponent<AutoSeller>().takeMoney(money);
         }
     }
 }

@@ -23,9 +23,26 @@ public class ItemSO : ScriptableObject
     public class Itemproperty{
         public ItempropertyType PropertyType;
         public int Value;
+        public void ItemProperty()
+        {
+        }
+        public void ItemProperty(ItempropertyType type,int value){
+            this.PropertyType=type;
+            this.Value=value;
+        }
+        
     }
     public enum ItempropertyType{
+        MoneyValue,
         MindValue,
-        LuckValue
+        LuckValue,
+        StaminaValue,
+        ConfidenceValue,
+        AttractionValue,
+        LiberalKnowledgeValue,
+        MathsKnowledgeValue,
+        PhysicsKnowledgeValue,
+        ComputerKnowledgeValue,
+        ChemistryKnowledgeValue
     }
 }
