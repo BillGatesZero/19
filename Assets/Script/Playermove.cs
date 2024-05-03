@@ -22,15 +22,15 @@ public class Playermove : MonoBehaviour
     void Update()
     {
     float h = Input.GetAxis("Horizontal");
+    float r = 10f*Input.GetAxis("Mouse X");
     float v = Input.GetAxis("Vertical");
     if(v != 0||h != 0){
        
     }
 　　//朝一个方向移动 new Vector3(0, 0, v) * speed * Time.deltaTime是个向量
 
-    transform.Translate(new Vector3(0, 0, v) * movespeed * Time.deltaTime);//前后移动
-
-    transform.Rotate(new Vector3(0, h, 0) * rotateSpeed * Time.deltaTime);
+    transform.Translate(new Vector3(h, 0, v) * movespeed * Time.deltaTime);//前后移动
+    transform.Rotate(new Vector3(0, r, 0) * rotateSpeed * Time.deltaTime);
         
         
         if(Input.GetMouseButtonDown(0))

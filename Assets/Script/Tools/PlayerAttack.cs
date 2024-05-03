@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(tool!=null && Input.GetMouseButtonDown(0)){
+        if(tool!=null && Input.GetKeyDown(KeyCode.F)){
             tool.Pay();
         }  
     }
@@ -25,7 +25,7 @@ public class PlayerAttack : MonoBehaviour
         Transform toolparent=transform.Find(prefabname+"P");
         GameObject toolgo=GameObject.Instantiate(Tool.Prefab);
         toolgo.transform.SetParent(toolparent);
-        toolgo.transform.localPosition=Vector3.zero;
+        toolgo.transform.localPosition=Vector3.zero+Vector3.up*4f;
         toolgo.transform.localRotation=Quaternion.identity;
         this.tool=toolgo.GetComponent<Tools>();
     }

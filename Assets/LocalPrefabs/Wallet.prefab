@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Money: 0
+  money: 50
 --- !u!54 &-7457394322115352238
 Rigidbody:
   m_ObjectHideFlags: 0

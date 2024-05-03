@@ -15,7 +15,6 @@ public class ItemUI : MonoBehaviour
     
     public void initItem(ItemSO itemSO)
     {
-        
         string type="";
         switch(itemSO.type){
             case ItemSO.Itemtype.Consumable:

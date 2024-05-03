@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 public class DialogeUI : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -11,6 +12,7 @@ public class DialogeUI : MonoBehaviour
     public List<string> ContentList;
     public Button ContinueButton;
     private int index=0;
+    private Action onDialogueEnd;
     public void Start(){
         
         Name=transform.Find("Name").GetComponent<TextMeshProUGUI>();
@@ -23,13 +25,14 @@ public class DialogeUI : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-    public void Show(string name, string[] Content){
+    public void Show(string name, string[] Content,Action onDialogueEnd=null){
 
 Name.text = name;
 ContentList=new List<string>();
 ContentList.AddRange(Content);
 ContentText.text=ContentList[0];
 gameObject.SetActive(true);
+this.onDialogueEnd=onDialogueEnd;
     }
     // Update is called once per frame
     private void Hide(){
@@ -39,6 +42,7 @@ gameObject.SetActive(true);
         if(index>=ContentList.Count-1){
             Hide();
             index=0;
+            onDialogueEnd?.Invoke();
             return;
         }
         index++;

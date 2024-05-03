@@ -6,15 +6,14 @@ public class AutoSeller : MonoBehaviour
 {
     // Start is called before the first frame update
     public int price=100;
+    public int mind=1;
     private int currentprice;
     public void Start(){currentprice=price;}
-    public void takeMoney(int money)
-    {
+    public void takeMoney(int money){
         currentprice-=money;
-        if(currentprice<=0){
-            //for (int i = 0; i < 2; i++){
-            
-                ItemSO item=ItemDBManager.instance.GetRandomItem();
+        if(currentprice<=0){Bought();}}
+    private void Bought(){//for (int i = 0; i < 2; i++){
+         ItemSO item=ItemDBManager.instance.itemDB.items[0];
                 print(transform.position);
                 GameObject obj=Instantiate(item.Prefab,transform.position+Vector3.up,Quaternion.identity);
                 obj.tag="Interactable";
@@ -36,8 +35,7 @@ public class AutoSeller : MonoBehaviour
                 }
             //}
         currentprice=100;
-            
-        }
+        EventsManager.AutoSell(this);
     }
     void Update(){//if(Input.GetKeyDown(KeyCode.Space)){takeMoney(100);}
     }

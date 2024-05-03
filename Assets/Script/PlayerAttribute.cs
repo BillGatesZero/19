@@ -25,6 +25,7 @@ public class PlayerAttribute : MonoBehaviour
         //propertiDict.Add(ItemPropertyType.MoneyValue, new List<ItemProperty>());
         //AddProperty(ItemPropertyType.MindValue, 500);
         //AddProperty(ItemPropertyType.LuckValue, 0);
+        EventsManager.OnAutoSell += OnSell;
         //AddProperty(ItemPropertyType.MoneyValue, 0);
     }
     
@@ -34,7 +35,15 @@ public class PlayerAttribute : MonoBehaviour
     //public void RemoveProperty(ItemPropertyType type, int value){List<ItemProperty> list;
       // propertiDict.TryGetValue(type, out list);
       //  list.Remove(list.Find(x => x.Value == value));}
-
+    public void UseConsumable(ItemSO item){
+        print(item.type);
+        foreach (ItemSO.Itemproperty itemp in item.Properties)
+        {
+            print(itemp.Value+" "+itemp.PropertyType);
+            
+            ChangeAttribute(itemp.PropertyType, itemp.Value);
+        }
+    }
     public void ChangeAttribute(ItemSO.ItempropertyType type, int value)
     {
         switch (type)
@@ -51,10 +60,19 @@ public class PlayerAttribute : MonoBehaviour
             case ItemSO.ItempropertyType.ChemistryKnowledgeValue: ChemistryKnowledge += value; return;
         }
     }
-
+    public void Taskcomplete(GameTaskSO taskSO){
+        foreach (ItemSO.Itemproperty itemp in taskSO.Properties){
+        ChangeAttribute(itemp.PropertyType, itemp.Value);}
+    }
     // Update is called once per frame
     void Update()
     {
         
+    }
+    private void OnSell(AutoSeller autoSeller){
+        this.Mind+=autoSeller.mind;
+    }
+    private void OnDestroy(){
+        EventsManager.OnAutoSell -= OnSell;
     }
 }
