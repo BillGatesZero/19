@@ -17,6 +17,7 @@ public class PlayerAttribute : MonoBehaviour
     public int ComputerKnowledge = 0;//8
     public int ChemistryKnowledge = 0;//9
 
+    public double Totaldistance = 0;
     void Start()
     {
         //propertiDict = new Dictionary<ItemPropertyType, List<ItemProperty>>();
@@ -58,8 +59,10 @@ public class PlayerAttribute : MonoBehaviour
             case ItemSO.ItempropertyType.PhysicsKnowledgeValue: PhysicsKnowledge += value; return;
             case ItemSO.ItempropertyType.ComputerKnowledgeValue: ComputerKnowledge += value; return;
             case ItemSO.ItempropertyType.ChemistryKnowledgeValue: ChemistryKnowledge += value; return;
+
         }
     }
+    public void Adddistance(double distance){Totaldistance+=distance;}
     public void Taskcomplete(GameTaskSO taskSO){
         foreach (ItemSO.Itemproperty itemp in taskSO.Properties){
         ChangeAttribute(itemp.PropertyType, itemp.Value);}

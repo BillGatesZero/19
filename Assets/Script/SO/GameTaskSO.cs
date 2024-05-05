@@ -11,7 +11,7 @@ using System;
         Complete,
         End
     }
-    [CreateAssetMenu()]
+
     public class GameTaskSO : ScriptableObject
     {
         public GameTaskState state;
@@ -19,28 +19,16 @@ using System;
         public ItemSO start;
         public ItemSO end;
         public List<ItemSO.Itemproperty> Properties;
-        public int toolscount=2;
-        public int currentcount=0;
         
-        public void Start()
+        
+        public virtual void Starttask(){state = GameTaskState.InProgress;
+        if(start!=null){InventoryManager.instance.AddItem(start);}}
+        public virtual void UpdateState(){}
+        public virtual void Complete()
         {
-            currentcount=0;
-            state = GameTaskState.InProgress;
-            EventsManager.OnAutoSell += OnAutoSell;
-        }
-        public void OnAutoSell(AutoSeller autoSeller)
-        {
-            currentcount++;
-            if (currentcount >= toolscount){
-                state = GameTaskState.Complete;
-                Complete();
-            }
-        }
-        public void Complete()
-        {
+            state = GameTaskState.Complete;
             //foreach (ItemSO.Itemproperty property in Properties){playerAttribute.ChangeAttribute(property.PropertyType, property.Value);}
             if(end!=null){InventoryManager.instance.AddItem(end);}
-            EventsManager.OnAutoSell -= OnAutoSell;
         }
     }
    // }

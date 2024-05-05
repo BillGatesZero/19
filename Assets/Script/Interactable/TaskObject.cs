@@ -5,44 +5,51 @@ using UnityEngine;
 public class TaskObject : InteractableObject
 {
     public string Name;
-    public GameTaskSO GameTaskso;
+    public List<GameTaskSO> GameTaskso;
+    private GameTaskSO CurrentTask;
     public DialogeUI DialogeUI;
     private PlayerAttribute player;
     public GameObject next;
     private TimeManager timeManager;
     public void Start(){
-        GameTaskso.state = GameTaskState.UnStart;
+        foreach (GameTaskSO task in GameTaskso){
+            task.state = GameTaskState.UnStart;}
+            CurrentTask=GameTaskso[0];
         //playerAttribute=Player.GetComponent<PlayerAttribute>();
         player=GameObject.Find("Player").GetComponent<PlayerAttribute>();
-        timeManager=GameObject.Find("ItemDBManager").GetComponent<TimeManager>();
-    }
+        timeManager=GameObject.Find("ItemDBManager").GetComponent<TimeManager>();}
+        
     protected override void Interact()
-    {
-        if(GameTaskso.state!=GameTaskState.End){
-        DialogeUI.Show(Name,GameTaskso.dialogue,OnDialogueEnd);
-        print(GameTaskso.state);}
+    {   foreach (GameTaskSO task in GameTaskso){
+        if(task.state!=GameTaskState.End){
+        DialogeUI.Show(Name,task.dialogue,OnDialogueEnd);
+        print(task.state);
+        break;}}
     }
     public void OnDialogueEnd()
     {
-        print(GameTaskso.state);
-        switch (GameTaskso.state)
+        switch (CurrentTask.state)
         {
             case GameTaskState.UnStart:
-                InventoryManager.instance.AddItem(GameTaskso.start);
-                GameTaskso.Start();
+                CurrentTask.Starttask();
                 break;
             case GameTaskState.InProgress:
-                GameTaskso.state = GameTaskState.InProgress;
+                CurrentTask.state = GameTaskState.InProgress;
                 break;
         }
     }
     public void Update(){
-        if(GameTaskso.state==GameTaskState.Complete){
-            player.Taskcomplete(GameTaskso);
-            GameTaskso.state = GameTaskState.End;
+        CurrentTask.UpdateState();
+        if(CurrentTask.state==GameTaskState.Complete){
+            player.Taskcomplete(CurrentTask);
+            CurrentTask.state = GameTaskState.End;
+            print(GameTaskso.IndexOf(CurrentTask));
+            foreach (GameTaskSO task in GameTaskso){print(task.state);
+                if(task.state!=GameTaskState.End){task.Starttask();CurrentTask=task;return;}}
+
             next.SetActive(true);
             Destroy(this.gameObject);
-            timeManager.SetDate(2014,5,11);
-        }
+            timeManager.SetDate(2014,5,11);}
+        
     }
 }

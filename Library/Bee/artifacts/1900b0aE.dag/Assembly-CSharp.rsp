@@ -382,6 +382,8 @@
 "Assets/Script/PlayerAttribute.cs"
 "Assets/Script/Playermove.cs"
 "Assets/Script/PlayerPick.cs"
+"Assets/Script/SO/BuyingTaskSO.cs"
+"Assets/Script/SO/DestinationTaskSO.cs"
 "Assets/Script/SO/GameTaskSO.cs"
 "Assets/Script/SO/GTList.cs"
 "Assets/Script/SO/ItemDB.cs"
