@@ -42,6 +42,9 @@ public class TaskObject : InteractableObject
         CurrentTask.UpdateState();
         if(CurrentTask.state==GameTaskState.Complete){
             player.Taskcomplete(CurrentTask);
+            if(CurrentTask.isfail){ foreach (GameTaskSO task in GameTaskso){
+            task.state = GameTaskState.UnStart;}
+            CurrentTask=GameTaskso[0];}
             CurrentTask.state = GameTaskState.End;
             print(GameTaskso.IndexOf(CurrentTask));
             foreach (GameTaskSO task in GameTaskso){print(task.state);

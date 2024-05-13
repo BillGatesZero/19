@@ -25,7 +25,7 @@ public class TimeManager : MonoBehaviour
     private void FixedUpdate(){
         
     totalseconds+=Time.deltaTime;
-    if(totalseconds>=0.099f){
+    if(totalseconds>=0.009f){
             totalseconds=0;
             seconds++; 
     if(seconds>=60){

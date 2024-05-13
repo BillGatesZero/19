@@ -15,8 +15,9 @@ MonoBehaviour:
   state: 3
   dialogue:
   - Start
-  start: {fileID: 11400000, guid: 512d8bb4c7a8b9b4d83b7569b74f8862, type: 2}
+  start: {fileID: 11400000, guid: 1ab9c4ffcacf7e546bed169be1771b24, type: 2}
   end: {fileID: 0}
   Properties: []
+  isfail: 0
   toolscount: 2
   currentcount: 2

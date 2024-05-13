@@ -10,5 +10,6 @@ public class Tag
     public const string ITA = "Interactable";
     public const string GND = "Ground";
     public const string TOL = "Tools";
+    public const string ENM = "Enemy";
     
 }
