@@ -41,7 +41,7 @@ public class InventoryUI : MonoBehaviour
     }
     public void AddItem(ItemSO itemSO){
 
-    
+        
         GameObject itemGo= GameObject.Instantiate(itemPrefab);
         itemGo.transform.SetParent(content.transform);
         ItemUI itemUI=itemGo.GetComponent<ItemUI>();
@@ -49,10 +49,10 @@ public class InventoryUI : MonoBehaviour
     }
     public void OnIClick(ItemSO itemSO,ItemUI itemUI){itemDTUI.UpdateItemDetailUI(itemSO,itemUI);}
     public void OnItemUse(ItemSO itemSO,ItemUI itemUI){
-        Destroy(itemUI.gameObject);
+        if(itemSO.type==ItemSO.Itemtype.Consumable){Destroy(itemUI.gameObject);}
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().UseItem(itemSO);
         //player.GetComponent<Player>().UseItem(itemSO);
-        InventoryManager.instance.RemoveItem(itemSO);
+        if(itemSO.type==ItemSO.Itemtype.Consumable){InventoryManager.instance.RemoveItem(itemSO);}
         
         
     }

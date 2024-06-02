@@ -27,6 +27,7 @@ public class PlayerAttribute : MonoBehaviour
         //AddProperty(ItemPropertyType.MindValue, 500);
         //AddProperty(ItemPropertyType.LuckValue, 0);
         EventsManager.OnAutoSell += OnSell;
+        EventsManager.OnEnemyDeath += OnDeath;
         //AddProperty(ItemPropertyType.MoneyValue, 0);
     }
     
@@ -72,10 +73,10 @@ public class PlayerAttribute : MonoBehaviour
     {
         
     }
-    private void OnSell(AutoSeller autoSeller){
-        this.Mind+=autoSeller.mind;
-    }
+    private void OnSell(AutoSeller autoSeller){this.Mind+=autoSeller.mind;}
+    private void OnDeath(Enemy enemy){this.Mind+=enemy.mind;}
     private void OnDestroy(){
         EventsManager.OnAutoSell -= OnSell;
+        EventsManager.OnEnemyDeath-=OnDeath;
     }
 }

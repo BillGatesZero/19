@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
         //AddItem(defaultItem);}
     public List<ItemSO> itemLs = new List<ItemSO>();
     public void AddItem(ItemSO item){
+        foreach(ItemSO itemSO in itemLs){if(itemSO==item&&item.type!=ItemSO.Itemtype.Consumable){itemSO.count+=item.count;return;}}
         itemLs.Add(item);
         InventoryUI.inventoryUI.AddItem(item);
     }

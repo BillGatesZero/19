@@ -7,6 +7,7 @@ public class InteractableObject : MonoBehaviour
 {
     // Start is called before the first frame update
     public void Onclick(NavMeshAgent Playeragent){
+       
         Playeragent.stoppingDistance = 2F;
         //Playeragent.SetDestination(transform.position);
 

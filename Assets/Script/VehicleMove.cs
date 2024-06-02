@@ -43,7 +43,7 @@ public class VehicleMove : MonoBehaviour
             }
     }
     private void OnCollisionEnter(Collision other){
-        currentSpeed/=1.4f;
+        if(other.gameObject.tag!=Tag.GND){currentSpeed/=1.4f;}
     }
     
 }

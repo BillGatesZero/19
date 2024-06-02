@@ -8,6 +8,7 @@ public class ItemUI : MonoBehaviour
     //public Image itemimage;
     public TextMeshProUGUI itemtext;
     public TextMeshProUGUI itemType;
+    public TextMeshProUGUI itemcount;
     private ItemSO itemSO;
     // Start is called before the first frame update
 
@@ -24,6 +25,7 @@ public class ItemUI : MonoBehaviour
         }
         itemtext.text = itemSO.name;
         itemType.text = type;
+        itemcount.text = itemSO.count.ToString();
         this.itemSO = itemSO;
     }
     public void OnClick()

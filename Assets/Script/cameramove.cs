@@ -15,10 +15,12 @@ public class cameramove : MonoBehaviour
     void Update()
     {
         float h = 0.04f*Input.GetAxis("Mouse Y");
-        if(isfirst==false&&Input.GetMouseButton(0)&&(transform.localPosition.z>-20f||h<0)&&(transform.localPosition.z<-0.8f||h>0)){
-        transform.Translate(0, h*(transform.localPosition.y-1f), h*transform.localPosition.z*0.5f);}
+        //if((transform.localPosition.z>-20f||h<0)&&(transform.localPosition.z<-0.8f||h>0)){
+        //transform.Translate(0, h*(transform.localPosition.y-1f), h*transform.localPosition.z*0.5f);
+        transform.Rotate(-50f*h, 0, 0);
+        //}
 
-        if(Input.GetKeyDown(KeyCode.H)){if(isfirst==false){isfirst=true;transform.localPosition=new Vector3(0,3.2f,0.08f);}
+        if(Input.GetKeyDown(KeyCode.H)){if(isfirst==false){isfirst=true;transform.localPosition=new Vector3(0,2.3f,0.08f);}
         else{isfirst=false;transform.localPosition=new Vector3(0,5f,-8f);}}
             
         

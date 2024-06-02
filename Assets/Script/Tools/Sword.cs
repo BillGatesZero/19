@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sword : Tools
 {
     // Start is called before the first frame update
-    public int money = 60;
+    public int money = 10;
     private bool isPay = false;
 
     private void Start(){
@@ -24,8 +24,8 @@ public class Sword : Tools
         
     }
     private void OnTriggerEnter(Collider other){
-        if(other.tag == Tag.SEL&&isPay){
-            other.GetComponent<AutoSeller>().takeMoney(money);
+        if((other.tag == Tag.ENM)&&isPay){
+            other.GetComponent<Enemy>().takeMoney(money);
         }
     }
 }

@@ -19,15 +19,11 @@ public class DestinationTaskSO : GameTaskSO
         playerAttribute=GameObject.Find("Player").GetComponent<PlayerAttribute>();
         dest=destinations[0];
         Target=null;
-        isfail=false;
-    }
-    // Update is called once per frame
+        isfail=false;}// Update is called once per frame
     public override void Fail(){
         isfail=true;
         state = GameTaskState.UnStart;
-        if(Target!=null){Destroy(Target.gameObject);}
-
-    }
+        if(Target!=null){Destroy(Target.gameObject);}}
     public override void UpdateState()
     {   if(state==GameTaskState.InProgress){
         //Debug.Log(Vector3.Distance(player.position,destinations[0]));
@@ -37,9 +33,4 @@ public class DestinationTaskSO : GameTaskSO
         if(Vector3.Distance(player.position,dest)<5f){
             if(Target!=null){Destroy(Target.gameObject);}
             if(index==destinations.Count-1){Complete();return;}else{dest=destinations[index+1];}}}
-
-
-    }
-
-
-}
+}}
