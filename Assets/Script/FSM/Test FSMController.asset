@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fbd4d875fc9c244aa5a60af9e992ab, type: 3}
+  m_Name: Test FSMController
+  m_EditorClassIdentifier: 
+  viewPosition: {x: 149.6, y: 103.2, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
+  Layers: []
+  originGUID: 
+  states:
+  - rect:
+      serializedVersion: 2
+      x: -140
+      y: 0
+      width: 200
+      height: 40
+    defaultState: 0
+    name: Any State
+    StateScripts: []
+    parents: []
+    isSubStateMachine: 0
+    isBuildInState: 1
+    buildInStateName: Any State
+  - rect:
+      serializedVersion: 2
+      x: -140
+      y: 300
+      width: 200
+      height: 40
+    defaultState: 0
+    name: Entry
+    StateScripts: []
+    parents: []
+    isSubStateMachine: 0
+    isBuildInState: 1
+    buildInStateName: Entry
+  - rect:
+      serializedVersion: 2
+      x: -120
+      y: 120
+      width: 200
+      height: 40
+    defaultState: 1
+    name: New State1
+    StateScripts:
+    - className: IdleWait
+      guid: 08e3760c0bbde934fb39a1a5a055461f
+    parents: []
+    isSubStateMachine: 0
+    isBuildInState: 0
+    buildInStateName: 
+  - rect:
+      serializedVersion: 2
+      x: 320
+      y: 100
+      width: 200
+      height: 40
+    defaultState: 0
+    name: New State2
+    StateScripts:
+    - className: Pursue
+      guid: 439a1f5d4fd95324f9dea88ee1f99aea
+    parents: []
+    isSubStateMachine: 0
+    isBuildInState: 0
+    buildInStateName: 
+  parameters:
+  - name: Distance
+    value: 0
+    parameterType: 0
+  transitions:
+  - fromStateName: New State1
+    toStateName: New State2
+    conditions:
+    - targetValue: 40
+      parameterName: Distance
+      compareType: 1
+    group_conditions: []
+    AutoSwtich: 0
+  - fromStateName: New State2
+    toStateName: New State1
+    conditions:
+    - targetValue: 40
+      parameterName: Distance
+      compareType: 0
+    group_conditions: []
+    AutoSwtich: 0
