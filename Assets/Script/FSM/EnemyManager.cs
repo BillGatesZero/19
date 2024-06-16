@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     //private FSMController fsmController;
     private GameObject enemy;
-    private GameObject player;
+    public GameObject player;
     private float dist;
     public BaseStateType currentState;
     public List<BossSkill> BossSkills;
@@ -31,6 +31,7 @@ public class EnemyManager : MonoBehaviour
         enemy = this.gameObject;
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
+        animator.SetInteger("SkillAnimationID", 0);
     }
 
     // Update is called once per frame
@@ -39,12 +40,14 @@ public class EnemyManager : MonoBehaviour
         dist=Vector3.Distance(player.transform.position, enemy.transform.position);
         //fsmController.SetFloat("Distance",dist);
         //print(dist);
+        UpdateSkills();
         ChangeStates();
         execute();
     }
 
     public void ChangeStates()
     {
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")||animator.GetCurrentAnimatorStateInfo(0).IsName("Run")){
         switch (currentState)
         {
             case BaseStateType.IdleWait:
@@ -52,11 +55,14 @@ public class EnemyManager : MonoBehaviour
                 break;
             case BaseStateType.Pursue:
                 if(dist > 30f){SwitchState(BaseStateType.IdleWait);}
-
+                if(dist < 2f||(dist < 10f&&dist>=2f&&BossSkills[0].canAttack)){SwitchState(BaseStateType.AttackState);}
+                break;
+            case BaseStateType.AttackState:
+                if(dist >= 10f||(dist < 10f&&dist>=2f&&!BossSkills[0].canAttack)){SwitchState(BaseStateType.Pursue);}
                 break;
             default:
                 break;
-        }}
+        }}}
     public void SwitchState(BaseStateType newState){
         switch(currentState){
             case BaseStateType.IdleWait: IdleWait.OnExit();break;
@@ -85,4 +91,14 @@ public class EnemyManager : MonoBehaviour
 
     }
 }
+
+    public void UpdateSkills()
+    {
+
+        foreach (BossSkill skill in BossSkills){
+            if(skill.cooltimeLeft > 0){skill.cooltimeLeft -= Time.deltaTime;}
+            if(skill.durationLeft > 0){skill.durationLeft -= Time.deltaTime;}
+            if ((skill.cooltimeLeft <= 0&&dist < skill.Distance)||(skill.durationLeft > 0)){skill.canAttack = true;}
+            else{skill.canAttack = false;}}
+    }
 }

@@ -19,7 +19,9 @@ public class Pursue : BaseState
         
     }
     public override void Tick(){
-        agent.stoppingDistance = 2f;
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")&&!animator.GetCurrentAnimatorStateInfo(0).IsName("Run")){
+        agent.stoppingDistance = 20f;}
+        else{agent.stoppingDistance = 2f;}
         agent.SetDestination(player.transform.position);
         if(agent.remainingDistance >= agent.stoppingDistance){
             animator.SetBool("Run",true);}
