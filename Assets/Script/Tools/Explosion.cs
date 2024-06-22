@@ -10,8 +10,8 @@ public class Explosion : MonoBehaviour
         Destroy(gameObject, 1f);
     }
     // Update is called once per frame
-    void Update()
-    {
-        
+    
+    public void OnTriggerEnter(Collider colli){
+        if(colli.gameObject.tag == "Player"){colli.gameObject.GetComponent<PlayerAttribute>().ChangeAttribute(ItemSO.ItempropertyType.MindValue,-30);}
     }
 }

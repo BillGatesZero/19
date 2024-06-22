@@ -19,6 +19,7 @@ public class MagicBall : MonoBehaviour
 
     // Update is called once per frame
     private void OnCollisionEnter(Collision colli){
+        if(colli.collider.tag == "Player"){colli.gameObject.GetComponent<PlayerAttribute>().ChangeAttribute(ItemSO.ItempropertyType.MindValue,-20);}
         if(colli.collider.tag != "Enemy"){
             Explode();
     }}

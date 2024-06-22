@@ -13,7 +13,9 @@ public class BossSkill
     public float Distance;
     public float cooltimeLeft;
     public bool canAttack;
+    public bool attacking;
     public float durationLeft;
+
     // Update is called once per frame
     
 }

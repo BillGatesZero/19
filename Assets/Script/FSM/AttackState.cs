@@ -8,12 +8,15 @@ public class AttackState : BaseState
     private Transform playerTransform;
     private Animator animator;
     private UnityEngine.AI.NavMeshAgent agent;
-    private BossSkill currentskill;
+    public BossSkill currentskill;
+    public List<BossSkill> availableSkills;
     public override void Tick(){
         transform.LookAt(playerTransform);
         UseSkill();
-
+        //availableSkills = new List<BossSkill>();
+        
         }
+        
 
     public override void OnEnter()
     {
@@ -29,21 +32,33 @@ public class AttackState : BaseState
     public override void OnExit()
     {animator.SetInteger("SkillAnimationID", 0);}
     private void UseSkill(){
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")||animator.GetCurrentAnimatorStateInfo(0).IsName("Run")){
+        //if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")||animator.GetCurrentAnimatorStateInfo(0).IsName("Run")){
+            availableSkills.Clear();
             foreach(BossSkill skill in enemyManager.BossSkills){
+                if(skill.canAttack){availableSkills.Add(skill);
+                if(availableSkills.Count!=0){print(availableSkills.Count);}}
                 if(skill.canAttack){
                     animator.SetInteger("SkillAnimationID", skill.AnimationID);
                     currentskill=skill;
-                    if(skill.cooltimeLeft <= 0){skill.cooltimeLeft = skill.cooltime;skill.durationLeft = skill.duration;}
+                    if(skill.cooltimeLeft <= 0){skill.cooltimeLeft = skill.cooltime;}
+                    if(skill.durationLeft <= 0){skill.durationLeft = skill.duration;}
+                    currentskill.attacking = true;
                     break;
                     
                 }
             }
+            if(currentskill!=null){
+                if(currentskill.attacking){
+                    animator.SetInteger("SkillAnimationID", currentskill.AnimationID);
+                }else{animator.SetInteger("SkillAnimationID", 0);
+                currentskill.attacking = false;
+                currentskill=null;}
+
+            }
+
+               
             
-        if(currentskill.cooltimeLeft > 0&&currentskill.durationLeft <= 0){
-                    animator.SetInteger("SkillAnimationID", 0);}
-            
-        }
+        //}
 
     }
     

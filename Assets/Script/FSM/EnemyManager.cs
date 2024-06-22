@@ -58,7 +58,7 @@ public class EnemyManager : MonoBehaviour
                 if(dist < 2f||(dist < 10f&&dist>=2f&&BossSkills[0].canAttack)){SwitchState(BaseStateType.AttackState);}
                 break;
             case BaseStateType.AttackState:
-                if(dist >= 10f||(dist < 10f&&dist>=2f&&!BossSkills[0].canAttack)){SwitchState(BaseStateType.Pursue);}
+                if(dist >= 10f||(dist < 10f&&dist>=2f&&!(BossSkills[0].canAttack||BossSkills[0].attacking))){SwitchState(BaseStateType.Pursue);}
                 break;
             default:
                 break;
@@ -92,13 +92,14 @@ public class EnemyManager : MonoBehaviour
     }
 }
 
-    public void UpdateSkills()
+    public void UpdateSkills()// Detect skill state
     {
 
         foreach (BossSkill skill in BossSkills){
             if(skill.cooltimeLeft > 0){skill.cooltimeLeft -= Time.deltaTime;}
-            if(skill.durationLeft > 0){skill.durationLeft -= Time.deltaTime;}
-            if ((skill.cooltimeLeft <= 0&&dist < skill.Distance)||(skill.durationLeft > 0)){skill.canAttack = true;}
+            if(skill.durationLeft > 0){skill.durationLeft -= Time.deltaTime;skill.attacking = true ;}
+            else{skill.attacking = false;}
+            if ((skill.cooltimeLeft <= 0&&dist < skill.Distance)){skill.canAttack = true;}
             else{skill.canAttack = false;}}
     }
 }

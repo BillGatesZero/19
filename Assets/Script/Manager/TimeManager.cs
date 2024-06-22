@@ -29,7 +29,7 @@ public class TimeManager : MonoBehaviour
             totalseconds=0;
             seconds++; 
     if(seconds>=60){
-        minutes++;print(year+"-"+month+"-"+day+" "+hour+":"+minutes);
+        minutes++;//print(year+"-"+month+"-"+day+" "+hour+":"+minutes);
         seconds=0;
         if(minutes>=60){
             minutes=0;
