@@ -18,6 +18,7 @@ public class PlayerAttribute : MonoBehaviour
     public int ChemistryKnowledge = 0;//9
 
     public double Totaldistance = 0;
+
     void Start()
     {
         //propertiDict = new Dictionary<ItemPropertyType, List<ItemProperty>>();

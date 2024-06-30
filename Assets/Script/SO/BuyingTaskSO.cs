@@ -11,7 +11,9 @@ public class BuyingTaskSO : GameTaskSO
     public override void Starttask(){
             currentcount=0;
             state = GameTaskState.InProgress;
+            //Debug.Log(start.name);
             if(start!=null){InventoryManager.instance.AddItem(start);}
+            
             EventsManager.OnAutoSell += OnAutoSell;}
     public void OnAutoSell(AutoSeller autoSeller){
             currentcount++;

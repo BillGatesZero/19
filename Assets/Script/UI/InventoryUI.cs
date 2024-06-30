@@ -11,6 +11,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject itemPrefab;
     private bool isshow=false;
     public ItemDetailUI itemDTUI;
+    private InventoryManager inventoryManager;
     void Awake()
     {
         if(inventoryUI!=null && inventoryUI!=this){Destroy(this.gameObject);
@@ -20,13 +21,22 @@ public class InventoryUI : MonoBehaviour
     }
     void Start()
     {
+        inventoryManager=GameObject.Find("ItemDBManager").GetComponent<InventoryManager>();
         inventory=transform.Find("UI").gameObject;
         content=transform.Find("UI/Bg/Scroll View/Viewport/Content").gameObject;
         Hide();
     }
     // Update is called once per frame
-    public void Show(){inventory.SetActive(true);}
-    public void Hide(){inventory.SetActive(false);}
+    public void Show(){
+        foreach (ItemGroup item in inventoryManager.itemLs){AddItemtoUI(item);}
+        inventory.SetActive(true);}
+    public void Hide(){
+        for(int i = 0;i < content.transform.childCount; i++)
+            {
+                
+                Destroy(content.transform.GetChild(i).gameObject);
+            }
+        inventory.SetActive(false);}
     public void Update(){
         if (Input.GetKeyDown(KeyCode.E)){
             
@@ -39,20 +49,23 @@ public class InventoryUI : MonoBehaviour
             }
         }
     }
-    public void AddItem(ItemSO itemSO){
+    public void AddItemtoUI(ItemGroup itemGroup){
 
         
         GameObject itemGo= GameObject.Instantiate(itemPrefab);
         itemGo.transform.SetParent(content.transform);
         ItemUI itemUI=itemGo.GetComponent<ItemUI>();
-        itemUI.initItem(itemSO);
+        itemUI.initItem(itemGroup);
     }
-    public void OnIClick(ItemSO itemSO,ItemUI itemUI){itemDTUI.UpdateItemDetailUI(itemSO,itemUI);}
-    public void OnItemUse(ItemSO itemSO,ItemUI itemUI){
-        if(itemSO.type==ItemSO.Itemtype.Consumable){Destroy(itemUI.gameObject);}
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().UseItem(itemSO);
+    public void OnIClick(ItemGroup items,ItemUI itemUI){itemDTUI.UpdateItemDetailUI(items,itemUI);}
+    public void OnItemUse(ItemGroup items,ItemUI itemUI){
+        if(items.item.type==ItemSO.Itemtype.Consumable){
+            itemUI.itemcount.text = (int.Parse(itemUI.itemcount.text) - 1).ToString();
+            items.count--;
+            if(items.count<=0){Destroy(itemUI.gameObject);}}
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().UseItem(items.item);
         //player.GetComponent<Player>().UseItem(itemSO);
-        if(itemSO.type==ItemSO.Itemtype.Consumable){InventoryManager.instance.RemoveItem(itemSO);}
+        if(items.item.type==ItemSO.Itemtype.Consumable){InventoryManager.instance.RemoveItem(items);}
         
         
     }

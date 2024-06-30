@@ -9,6 +9,8 @@ public class Playermove : MonoBehaviour
     // Start is called before the first frame update
     private PlayerAttribute playerAttribute;
     private NavMeshAgent Playeragent;
+    //private GameObject Maincamera;
+    //private GameObject Player;
     //CharacterController characterController;
     //private Transform trans;
     public float movespeed = 0.1f;
@@ -23,6 +25,7 @@ public class Playermove : MonoBehaviour
     void Start()
     {
         //characterController = GetComponent<CharacterController>();
+        //Player = this.gameObject;
         Playeragent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         playerAttribute = GetComponent<PlayerAttribute>();
@@ -32,6 +35,7 @@ public class Playermove : MonoBehaviour
         dodgetimeleft = dodgetime;
         cd=2.5f;
         cdleft = cd;
+        //Maincamera = GameObject.Find("Main Camera");
         //trans=GetComponent<Transform>();
     }
 
@@ -41,6 +45,7 @@ public class Playermove : MonoBehaviour
     float h = Input.GetAxis("Horizontal");
     float r = 10f*Input.GetAxis("Mouse X");
     float v = Input.GetAxis("Vertical");
+    //if(Maincamera!=null){if(Maincamera.GetComponent<cameramove>().isfirst!=false){this.gameObject.layer=2;}else{this.gameObject.layer=0;}}
     transform.Rotate(new Vector3(0, r, 0) * rotateSpeed * Time.deltaTime);
     //if(v != 0||h != 0){}
 　　// new Vector3(0, 0, v) * speed * Time.deltaTime

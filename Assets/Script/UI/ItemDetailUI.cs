@@ -9,7 +9,7 @@ public class ItemDetailUI : MonoBehaviour
     public GameObject PropertyGrid;
     public GameObject ProperT;
     private ItemUI itemUI;
-    private ItemSO itemSO;
+    private ItemGroup items;
     // Start is called before the first frame update
     public void Start()
     {
@@ -18,15 +18,15 @@ public class ItemDetailUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void UpdateItemDetailUI(ItemSO itemSO,ItemUI itemUI)
+    public void UpdateItemDetailUI(ItemGroup itemGroup,ItemUI itemUI)
     {
-        this.itemSO = itemSO;
+        this.items = itemGroup;
         this.itemUI = itemUI;
         this.gameObject.SetActive(true);
-        description.text = itemSO.Description;
+        description.text = items.item.Description;
         foreach (Transform child in PropertyGrid.transform){if(child.gameObject.activeSelf){Destroy(child.gameObject);}}
         //foreach (Transform child in PropertyGrid.transform){Destroy(child.gameObject);}
-        foreach (ItemSO.Itemproperty itemproperty in itemSO.Properties)
+        foreach (ItemSO.Itemproperty itemproperty in items.item.Properties)
         {
             string property=" " ;
             string propertyStr=" " ;
@@ -56,7 +56,7 @@ public class ItemDetailUI : MonoBehaviour
     
 }
     public void OnUseButtonClick(){
-        InventoryUI.inventoryUI.OnItemUse(itemSO,itemUI);
+        InventoryUI.inventoryUI.OnItemUse(items,itemUI);
         this.gameObject.SetActive(false);
     }
 }

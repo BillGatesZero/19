@@ -13,7 +13,7 @@ public class ItemSO : ScriptableObject
     public List<Itemproperty> Properties;
     public Sprite Image;
     public GameObject Prefab;
-    public int count=1;//counting
+    public int count;//counting
     // Update is called once per frame
     public enum Itemtype{
         Tools,

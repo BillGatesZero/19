@@ -6,7 +6,7 @@ public class cameramove : MonoBehaviour
 {
     // Start is called before the first frame update
     // Update is called once per frame
-    private bool isfirst=false;
+    public bool isfirst=false;
     void Start(){
         isfirst=false;
         transform.localPosition=new Vector3(0,5f,-8f);
