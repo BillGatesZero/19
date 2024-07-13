@@ -78,22 +78,37 @@ public class Playermove : MonoBehaviour
     //control Attack animation
     
     if(playerAttack.tool!=null){
+    if(isaiming){
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2+25, Screen.height / 2));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit)&&Vector3.Dot(this.gameObject.transform.forward,Vector3.Normalize(hit.point  -toolPrefab.transform.position))>0.6f)
+            {
+            
+            toolPrefab.transform.LookAt(hit.point);
+            toolPrefab.transform.Rotate(new Vector3(0,90,0));
+            //toolPrefab.transform.localEulerAngles=new Vector3(0,toolPrefab.transform.localEulerAngles.y,toolPrefab.transform.localEulerAngles.z);
+            //toolPrefab.transform.localEulerAngles=new Vector3(0,toolPrefab.transform.localEulerAngles.y,toolPrefab.transform.localEulerAngles.z);
+            //toolPrefab.transform.forward = Vector3.Cross(hit.point - toolPrefab.transform.position, Vector3.up);
+            }}else if(toolPrefab!=null){toolPrefab.transform.localEulerAngles=new Vector3(0,0,0);toolPrefab=null;}
+        
     if(playerAttack.tool.isShootingTool==true&&Input.GetKeyDown(KeyCode.V)){
-        if(this.isaiming==false){isaiming=true;
+        if(!this.isaiming){isaiming=true;
         toolPrefab=playerAttack.tool.gameObject;
         leftIK.GetComponent<TwoBoneIKConstraint>().data.target=toolPrefab.transform.Find("LHandGrip");
         rightIK.GetComponent<TwoBoneIKConstraint>().data.target=toolPrefab.transform.Find("RHandGrip");
         this.gameObject.GetComponent<RigBuilder>().Build();
+        animator.SetInteger("Attack",4);
         }else{isaiming=false;
         leftIK.GetComponent<TwoBoneIKConstraint>().data.target=null;
         rightIK.GetComponent<TwoBoneIKConstraint>().data.target=null;
         this.gameObject.GetComponent<RigBuilder>().Build();
+        animator.SetInteger("Attack",3);
         }
 
     }else if (playerAttack.tool.isShootingTool==false){isaiming=false;}
     
     
-    
+
 
 
 
@@ -101,11 +116,11 @@ public class Playermove : MonoBehaviour
     if(Input.GetKey(KeyCode.C)){
         switch(playerAttack.tool.id){
             case 3:animator.SetInteger("Attack",1);break;
-            case 4:animator.SetInteger("Attack",2);break;
+            
 
         }
         
-    }else{if(playerAttack.tool.id==4){Debug.Log(playerAttack.tool.id);animator.SetInteger("Attack",3);}else{animator.SetInteger("Attack",0);}}}
+    }else{if(playerAttack.tool.id==4){if(!isaiming){animator.SetInteger("Attack",3);}}else{animator.SetInteger("Attack",0);}}}
     else{isaiming=false;}
 
 

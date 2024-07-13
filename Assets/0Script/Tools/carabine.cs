@@ -11,7 +11,7 @@ public class carabine : Tools
     private float timer=0f;
     public GameObject bullet;
     public GameObject firepoint;
-
+    public GameObject Gunspark;
     void Start()
     {
         id=4;
@@ -30,9 +30,10 @@ public class carabine : Tools
     }
     public void Fire(){
         timer=interval;
-        GameObject obj=Instantiate(bullet,firepoint.transform.position,Quaternion.identity);
+        GameObject obj=Instantiate(bullet,firepoint.transform.position,firepoint.transform.rotation);
+        GameObject spark=Instantiate(Gunspark,firepoint.transform.position,firepoint.transform.rotation);
         obj.GetComponent<RifleBullet>().damage=damage;
-        obj.GetComponent<RifleBullet>().firepoint=firepoint;
+        //obj.GetComponent<RifleBullet>().firepoint=firepoint;
         print("c");
     }
     
