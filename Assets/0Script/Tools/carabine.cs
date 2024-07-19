@@ -12,11 +12,13 @@ public class carabine : Tools
     public GameObject bullet;
     public GameObject firepoint;
     public GameObject Gunspark;
+    private InventoryManager inventoryManager;
     void Start()
     {
         id=4;
         isShootingTool=true;
         firepoint=GameObject.Find("Firepoint");
+        inventoryManager=GameObject.Find("ItemDBManager").GetComponent<InventoryManager>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,11 @@ public class carabine : Tools
         }
     }
     public void Fire(){
+        if(inventoryManager.CurrentItem.count<=0){
+            inventoryManager.RemoveItem(inventoryManager.CurrentItem);
+            return;}
+        if(inventoryManager.CurrentItem!=null){inventoryManager.CurrentItem.count-=1;
+        }
         timer=interval;
         GameObject obj=Instantiate(bullet,firepoint.transform.position,firepoint.transform.rotation);
         GameObject spark=Instantiate(Gunspark,firepoint.transform.position,firepoint.transform.rotation);

@@ -19,4 +19,4 @@ MonoBehaviour:
   Properties: []
   Image: {fileID: 0}
   Prefab: {fileID: 2705662828189696003, guid: 307247d78fc3982458d6f7df18f519ff, type: 3}
-  count: 10
+  count: 1000

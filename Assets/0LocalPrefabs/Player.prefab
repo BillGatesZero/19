@@ -3421,6 +3421,7 @@ MonoBehaviour:
   movespeed: 7
   rotateSpeed: 200
   isstop: 0
+  isaiming: 0
 --- !u!195 &4091943749759898601
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3755,7 +3756,7 @@ MonoBehaviour:
   m_Data:
     m_Root: {fileID: 137948903878059517}
     m_Mid: {fileID: 5571144892317879065}
-    m_Tip: {fileID: 1020100473398159157}
+    m_Tip: {fileID: 8216391819432678484}
     m_Target: {fileID: 0}
     m_Hint: {fileID: 0}
     m_TargetPositionWeight: 1

@@ -53,6 +53,7 @@ public class Playermove : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+        
     //print(Vector3.Distance(transform.position,new Vector3(484,6,392)));
     float h = Input.GetAxis("Horizontal");
     float r = 10f*Input.GetAxis("Mouse X");
@@ -73,7 +74,7 @@ public class Playermove : MonoBehaviour
     transform.Translate(new Vector3(h, 0, v) * movespeed * Time.deltaTime);
     if(cdleft>0){cdleft-=Time.deltaTime;}
     playerAttribute.Adddistance(movespeed*Time.deltaTime*Math.Sqrt(h*h+v*v));}
-
+    if(EventSystem.current.IsPointerOverGameObject()){return;}
 
     //control Attack animation
     
@@ -96,12 +97,12 @@ public class Playermove : MonoBehaviour
         toolPrefab=playerAttack.tool.gameObject;
         leftIK.GetComponent<TwoBoneIKConstraint>().data.target=toolPrefab.transform.Find("LHandGrip");
         rightIK.GetComponent<TwoBoneIKConstraint>().data.target=toolPrefab.transform.Find("RHandGrip");
-        this.gameObject.GetComponent<RigBuilder>().Build();
+        Invoke("ToBuildRig",0.3f);
         animator.SetInteger("Attack",4);
         }else{isaiming=false;
         leftIK.GetComponent<TwoBoneIKConstraint>().data.target=null;
         rightIK.GetComponent<TwoBoneIKConstraint>().data.target=null;
-        this.gameObject.GetComponent<RigBuilder>().Build();
+        ToBuildRig();
         animator.SetInteger("Attack",3);
         }
 
@@ -116,7 +117,7 @@ public class Playermove : MonoBehaviour
     if(Input.GetKey(KeyCode.C)){
         switch(playerAttack.tool.id){
             case 3:animator.SetInteger("Attack",1);break;
-            
+            case 1:animator.SetInteger("Attack",1);break;
 
         }
         
@@ -149,4 +150,5 @@ public class Playermove : MonoBehaviour
                 //    Playeragent.SetDestination(hit.point);}else 
                 if(hit.collider.tag == "Interactable"){hit.collider.GetComponent<InteractableObject>().Onclick(Playeragent);}}}
     }
+    public void ToBuildRig(){this.gameObject.GetComponent<RigBuilder>().Build();}
 }

@@ -10,11 +10,13 @@ public class ItemDetailUI : MonoBehaviour
     public GameObject ProperT;
     private ItemUI itemUI;
     private ItemGroup items;
+    private GameObject Player;
     // Start is called before the first frame update
     public void Start()
     {
         ProperT.SetActive(false);
         this.gameObject.SetActive(false);
+        Player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -56,6 +58,7 @@ public class ItemDetailUI : MonoBehaviour
     
 }
     public void OnUseButtonClick(){
+        
         InventoryUI.inventoryUI.OnItemUse(items,itemUI);
         this.gameObject.SetActive(false);
     }

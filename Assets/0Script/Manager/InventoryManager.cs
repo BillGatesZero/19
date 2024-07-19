@@ -9,12 +9,14 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager instance{get;private set;}
     public List<ItemGroup> itemLs;
     public List<Clothing> clothingLs;
+    public ItemGroup CurrentItem;
     private void Awake()
     {
         itemLs=new List<ItemGroup>();
         clothingLs=new List<Clothing>();
         if(instance != null && instance != this){Destroy(this.gameObject);}
         instance = this;
+        CurrentItem=null;
     }
     //IEnumerator Start(){
         //yield return new WaitForSeconds(0.5f);
@@ -30,5 +32,9 @@ public class InventoryManager : MonoBehaviour
     }
     public void RemoveItem(ItemGroup item){
         itemLs.Remove(item);
+    }
+    public void GetCurrentItem(ItemGroup item){
+        foreach(ItemGroup itemAs in itemLs){if(itemAs.item.name==item.item.name){CurrentItem=itemAs;return;}}
+        
     }
 }

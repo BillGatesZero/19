@@ -11,6 +11,7 @@ public class Wallet : Tools
 
     private void Start(){
         isPay=false;
+        id=1;
         isShootingTool = false;
         //anim = GetComponent<Animator>();
     }

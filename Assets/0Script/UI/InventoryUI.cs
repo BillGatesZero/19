@@ -12,12 +12,13 @@ public class InventoryUI : MonoBehaviour
     private bool isshow=false;
     public ItemDetailUI itemDTUI;
     private InventoryManager inventoryManager;
+    public ItemGroup CurrentItem;
     void Awake()
     {
         if(inventoryUI!=null && inventoryUI!=this){Destroy(this.gameObject);
         }
         inventoryUI=this;
-        
+        CurrentItem=null;
     }
     void Start()
     {
@@ -59,6 +60,7 @@ public class InventoryUI : MonoBehaviour
     }
     public void OnIClick(ItemGroup items,ItemUI itemUI){itemDTUI.UpdateItemDetailUI(items,itemUI);}
     public void OnItemUse(ItemGroup items,ItemUI itemUI){
+        if(!GameObject.FindGameObjectWithTag("Player").GetComponent<Playermove>().isaiming){//&&GameObject.Find("Player").GetComponent<Inventory>())
         if(items.item.type==ItemSO.Itemtype.Consumable){
             itemUI.itemcount.text = (int.Parse(itemUI.itemcount.text) - 1).ToString();
             items.count--;
@@ -66,7 +68,7 @@ public class InventoryUI : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().UseItem(items.item);
         //player.GetComponent<Player>().UseItem(itemSO);
         if(items.item.type==ItemSO.Itemtype.Consumable){InventoryManager.instance.RemoveItem(items);}
+        if(items.item.type==ItemSO.Itemtype.Tools){inventoryManager.GetCurrentItem(items);}
         
-        
-    }
+    }}
 }
