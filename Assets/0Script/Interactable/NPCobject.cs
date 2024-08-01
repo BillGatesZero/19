@@ -12,7 +12,7 @@ public class NPCobject : InteractableObject
     {
         dialogueUI.Show(NPCname, contentList);
     }
-
+    
     // Update is called once per frame
     void Update()
     {

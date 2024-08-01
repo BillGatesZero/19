@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public Tools tool;
+    public Toolsid tool;
     private Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
         }else{tool.UnPay();//print("unpay");
         } }
     }
-    public void LoadTool(Tools tool){this.tool=tool;}
+    public void LoadTool(Toolsid tool){this.tool=tool;}
     public void LoadTool(ItemSO Tool){
         if(tool!=null){Destroy(tool.gameObject);UnLoadTool();}
         string prefabname=Tool.Prefab.name;
@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
         toolgo.transform.SetParent(toolparent);
         toolgo.transform.localPosition=Vector3.zero;
         toolgo.transform.localRotation=Quaternion.identity;
-        this.tool=toolgo.GetComponent<Tools>();
+        this.tool=toolgo.GetComponent<Toolsid>();
     }
     public void UnLoadTool(){
         tool=null;

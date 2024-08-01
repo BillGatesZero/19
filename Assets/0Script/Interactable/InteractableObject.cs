@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class InteractableObject : MonoBehaviour
 {
     // Start is called before the first frame update
-    public void Onclick(NavMeshAgent Playeragent){
+    public void Onclick(){
        
-        Playeragent.stoppingDistance = 2F;
+        
         //Playeragent.SetDestination(transform.position);
 
         Interact();

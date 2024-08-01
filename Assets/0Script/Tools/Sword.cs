@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : Tools
+public class Sword : Toolsid
 {
     // Start is called before the first frame update
     public int money = 10;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 [System.Serializable]
 public class ExamQuestion{
 
@@ -20,15 +20,15 @@ public class ExamUI : MonoBehaviour
     private Button previousButton;
     private Button nextButton;
     private Button submitButton;
-    public InputField answerInput;
+    public TMP_InputField answerInput;
     public List<ExamQuestion> questions;
     private int currentQuestion = 0;
     void Start()
     {
-        answerInput = transform.Find("Image/AnswerInput").GetComponent<InputField>();
+        answerInput = transform.Find("AnswerInput").GetComponent<TMP_InputField>();
         previousButton = transform.Find("Image/PreviousButton").GetComponent<Button>();
         nextButton = transform.Find("Image/NextButton").GetComponent<Button>();
-        submitButton = transform.Find("Image/SubmitButton").GetComponent<Button>();
+        submitButton = transform.Find("Image/HoldButton").GetComponent<Button>();
         previousButton.onClick.AddListener(this.PreviousQuestion);
         nextButton.onClick.AddListener(this.NextQuestion);
         submitButton.onClick.AddListener(this.Submit);

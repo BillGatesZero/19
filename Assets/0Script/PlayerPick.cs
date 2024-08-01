@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerPick : MonoBehaviour
 {
     // Start is called before the first frame update
-    private void OnCollisionEnter(Collision collision){
-        if(collision.gameObject.tag == "Interactable"){
-            PickableObject pickableObject = collision.gameObject.GetComponent<PickableObject>();
+    private void OnControllerColliderHit(ControllerColliderHit hit){
+        if(hit.collider.gameObject.tag == "Interactable"){
+            PickableObject pickableObject = hit.collider.gameObject.GetComponent<PickableObject>();
             if(pickableObject != null){
                 InventoryManager.instance.AddItem(pickableObject.itemSO);
-                Destroy(collision.gameObject);
+                Destroy(hit.collider.gameObject);
                 
             }
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wallet : Tools
+public class Wallet : Toolsid
 {   
     //public const string ANIM_PARM_IS_PAYING = "Atk";
     //private Animator anim;
@@ -18,6 +18,7 @@ public class Wallet : Tools
     public override void Pay(){
         //anim.SetTrigger(ANIM_PARM_IS_PAYING);
         isPay = true;
+        
     }
     public override void UnPay(){
         isPay = false;
@@ -27,6 +28,7 @@ public class Wallet : Tools
         
     }
     private void OnTriggerEnter(Collider other){
+        print(other.tag);
         if(other.tag == Tag.SEL&&isPay){
             other.GetComponent<AutoSeller>().takeMoney(money);
         }

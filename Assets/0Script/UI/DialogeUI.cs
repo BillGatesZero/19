@@ -39,6 +39,10 @@ this.onDialogueEnd=onDialogueEnd;
         gameObject.SetActive(false);
     }
     public void OnClick(){
+        next();
+        
+    }
+    public void next(){
         if(index>=ContentList.Count-1){
             Hide();
             index=0;
@@ -47,6 +51,5 @@ this.onDialogueEnd=onDialogueEnd;
         }
         index++;
         ContentText.text=ContentList[index];
-        
     }
 }
