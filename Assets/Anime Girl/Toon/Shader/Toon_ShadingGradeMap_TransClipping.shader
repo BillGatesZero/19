@@ -87,7 +87,7 @@ Shader "UnityChanToonShader/Toon_ShadingGradeMap_TransClipping" {
 //リムライトマスク.
         _Set_RimLightMask ("Set_RimLightMask", 2D) = "white" {}
         _Tweak_RimLightMaskLevel ("Tweak_RimLightMaskLevel", Range(-1, 1)) = 0
-//ここまで.
+//ここまで.Render
         [Toggle(_)] _MatCap ("MatCap", Float ) = 0
         _MatCap_Sampler ("MatCap_Sampler", 2D) = "black" {}
         //v.2.0.6
