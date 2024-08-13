@@ -34,12 +34,5 @@ public class InteractiveDialogueUI : MonoBehaviour
     {
         
     }
-    public void next(int index){
-        if(!(currentDialogue.NextDialogueList[index].index<=0||currentDialogue.NextDialogueList[index].index>=dialogueList.dialogueList.Count||currentDialogue.NextDialogueList[index].index==null)){
-            currentDialogue=dialogueList.dialogueList[currentDialogue.NextDialogueList[index].index-1];
-            
-        }else{
-        onDialogueEnd?.Invoke();}
-       
-    }
+   
 }

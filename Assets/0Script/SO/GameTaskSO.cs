@@ -15,7 +15,7 @@ using System;
     public class GameTaskSO : ScriptableObject
     {
         public GameTaskState state;
-        public string[] dialogue;
+        public InteractiveDialogueList dialogue;
         public ItemSO start;
         public ItemSO end;
         public List<ItemSO.Itemproperty> Properties;

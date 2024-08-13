@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueList:
   - dialogueList:
-    - option: 
-      word: 
-      NextDialogueList: []
-    - option: 
-      word: 
+    - option: Hello.
+      word: Welcome to Cubic Jade City.
+      NextDialogueList:
+      - index: 1
+        Nextword: Good
+    - option: Good.
+      word: You can have a try
       NextDialogueList: []
   - dialogueList:
     - option: 

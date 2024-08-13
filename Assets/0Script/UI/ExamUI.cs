@@ -14,12 +14,19 @@ public class ExamQuestion{
 
 }
 
+[CreateAssetMenu()]
+public class ExamQuestionSO{
+    public List<ExamQuestion> questions;
+}
+
+
 public class ExamUI : MonoBehaviour
 {
     // Start is called before the first frame update
     private Button previousButton;
     private Button nextButton;
     private Button submitButton;
+    private Image image;
     public TMP_InputField answerInput;
     public List<ExamQuestion> questions;
     private int currentQuestion = 0;
@@ -36,21 +43,16 @@ public class ExamUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void ShowQuestion(){
+    public void ShowQuestion(){//show UI
         gameObject.SetActive(true);
         
     }
-    public void Show(){}
-    public void PreviousQuestion(){
-        if(currentQuestion > 0){
-            currentQuestion--;
-        }
+    public void UpdateContent(List<ExamQuestionSO> list, int index){//Update questions
+        if(list[index]!=null){this.questions= list[index].questions;}
     }
-    public void NextQuestion(){
-        if(currentQuestion < questions.Count-1){
-            currentQuestion++;
-        }
-    }
+    public void ShowFirstQuestion(){}
+    public void PreviousQuestion(){if(currentQuestion > 0){ currentQuestion--;}}
+    public void NextQuestion(){if(currentQuestion < questions.Count-1){currentQuestion++;}}
     public void Submit(){
         if(questions[currentQuestion].isHold) return;
         questions[currentQuestion].isHold = true;

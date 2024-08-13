@@ -52,7 +52,7 @@ public class TaskObject : InteractableObject
 
             next.SetActive(true);
             Destroy(this.gameObject);
-            timeManager.SetDate(2014,5,11);}
+            timeManager.SetDate(2);}
         
     }
 }
